@@ -4,7 +4,7 @@ from typing import List
 import re
 
 
-def filter_datum(fields: List, redaction: str, message: str,
+def filter_datum(fields: List[str], redaction: str, message: str,
                  seperator: str) -> str:
     """Function returns obfuscated log message
     Args:
@@ -16,7 +16,7 @@ def filter_datum(fields: List, redaction: str, message: str,
     Return:
         (str): Returns the obfuscated message
     """
-    parts = message.split(seperator)
+    parts: List[str] = message.split(seperator)
     for i, part in enumerate(parts):
         for field in fields:
             if part.startswith(field + '='):
