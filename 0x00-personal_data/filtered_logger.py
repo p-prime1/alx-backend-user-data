@@ -39,5 +39,4 @@ class RedactingFormatter(logging.Formatter):
     def format(self, record: logging.LogRecord) -> str:
         original_message = super().format(record)
         obfuscated_message = filter_datum(self.fields, self.REDACTION, original_message, self.SEPERATOR)
-        print(record.getMessage())
         return obfuscated_message
