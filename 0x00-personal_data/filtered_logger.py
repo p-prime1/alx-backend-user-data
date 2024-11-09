@@ -28,15 +28,16 @@ class RedactingFormatter(logging.Formatter):
     """Redacting Formatter class
     """
 
-    REDACTION = "***"
-    FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
-    SEPERATOR = ";"
+    REDACTION: str = "***"
+    FORMAT: str = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
+    SEPERATOR: str = ";"
 
     def __init__(self, fields):
         self.fields = fields
-        super(RedactionFormatter, self).__init__(self.FORMAT)
+        super(RedactingFormatter, self).__init__(self.FORMAT)
 
     def format(self, record: logging.LogRecord) -> str:
-        obfuscated_message = filter_datum(self.fields, self.REDACTION, record.getMessage(), self.SEPERATOR)
-        record.message = obfuscated_message
-        return super().format(record)
+        original_message = super().format(record)
+        obfuscated_message = filter_datum(self.fields, self.REDACTION, original_message, self.SEPERATOR)
+        print(record.getMessage())
+        return obfuscated_message
