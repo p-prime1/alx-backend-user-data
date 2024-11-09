@@ -3,6 +3,8 @@
 from typing import List
 import re
 import logging
+import mysql.connector
+import os
 
 
 PII_FIELDS = ("email", "phone", "ssn", "password", "ip")
@@ -63,3 +65,14 @@ class RedactingFormatter(logging.Formatter):
         obfuscated_message = filter_datum(self.fields, self.REDACTION,
                                           original_message, self.SEPERATOR)
         return obfuscated_message
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """Function returns a connector to database object"""
+    connection = mysql.connector.connect(
+            host=os.getenv(PERSONAL_DATA_DB_HOST),
+            user=os.getenv(PERSONAL_DATA_DB_USERNAME),
+            password=os.getenv(PERSONAL_DATA_DB_PASSWORD),
+            database=os.getenv(PERSONAL_DATA_DB_NAME)
+            )
+    return connection
