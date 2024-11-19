@@ -3,6 +3,7 @@
 """
 from flask import jsonify, abort
 from api.v1.views import app_views
+from typing import Any
 
 
 @app_views.route('/status', methods=['GET'], strict_slashes=False)
@@ -14,11 +15,11 @@ def status() -> str:
     return jsonify({"status": "OK"})
 
 
-@app_views.route('/api/v1/unauthorized', methods['GET'], strict_slashes=False)
-def unauthorized() -> str:
+@app_views.route('/api/v1/unauthorized', methods=['GET'], strict_slashes=False)
+def unauthorized() -> Any:
     """Get /api/v1/unauthorized
-    Return:
-        calls the abort function with 401"""
+    Raises
+        abort: A flask abort call with a 401 status code."""
     abort(401)
 
 
