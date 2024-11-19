@@ -24,6 +24,8 @@ def not_found(error) -> str:
 def unauthorized(error) -> str:
     """
         Unauthorized access
+        Return:
+            Unauthorized
     """
     return jsonify({"error": "Unauthorized"}), 401
 

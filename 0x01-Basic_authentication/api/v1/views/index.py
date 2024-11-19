@@ -16,7 +16,9 @@ def status() -> str:
 
 @app_views.route('/api/v1/unauthorized', methods['GET'], strict_slashes=False)
 def unauthorized() -> str:
-    """Get /api/v1/unauthorized"""
+    """Get /api/v1/unauthorized
+    Return:
+        calls the abort function with 401"""
     abort(401)
 
 
