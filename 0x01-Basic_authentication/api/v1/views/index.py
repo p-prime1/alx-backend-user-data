@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" Module of Index views
+""" Module of Index views including unauthorized
 """
 from flask import jsonify, abort, Response
 from api.v1.views import app_views
@@ -17,9 +17,11 @@ def status() -> Response:
 
 @app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
 def unauthorized() -> Any:
-    """Get /api/v1/unauthorized
-    Raises
-        abort: A flask abort call with a 401 status code."""
+    """
+        Get /api/v1/unauthorized
+        Raises
+            abort: A flask abort call with a 401 status code.
+        """
     abort(401)
 
 
