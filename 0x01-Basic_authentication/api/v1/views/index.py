@@ -15,14 +15,22 @@ def status() -> Response:
     return jsonify({"status": "OK"})
 
 
-@app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
+@app_views.route('/app/v1/unauthorized', methods=['GET'], strict_slashes=False)
 def unauthorized() -> Any:
+    """ Get /api/v1/unauthorized
+    Raises
+        abort: A flask abort call with a 401 status code.
     """
-        Get /api/v1/unauthorized
-        Raises
-            abort: A flask abort call with a 401 status code.
-        """
     abort(401)
+
+
+@app_views.route('/api/v1/forbidden', mehtods=['GET'], strict_slashes=False)
+def forbidden() -> Any:
+    """ Get /api/v1/forbidden
+    Raises
+        forbidden: A flask abort call with a 403 status code
+    """
+    abort(403)
 
 
 @app_views.route('/stats/', strict_slashes=False)
