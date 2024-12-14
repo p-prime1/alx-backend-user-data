@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from flask import request
+from typing import List, TypeVar
 """Module contains the Auth class for handling authentication
     in a flask application
 """
@@ -24,7 +25,10 @@ class Auth:
         Returns:
             bool: True if authentication is required, False otherwise
         """
-        return False
+        if not path or not excluded_paths:
+            return True
+        normalized_path = path if path.endswith('/') else f"{path}/"
+        return normalized_path not in excluded_paths
 
     def authorization_header(self, request=None) -> str:
         """
@@ -35,7 +39,7 @@ class Auth:
 
         Returns:
             str: The value of Authorization header if available,
-                otherwise None.
+                otherwis None.
         """
         return None
 
