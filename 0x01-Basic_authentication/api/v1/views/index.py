@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-""" Module of Index views including unauthorized
+""" Module of Index views, including routes for status,
+    unauthorized, and forbidden access.
 """
 from flask import jsonify, abort, Response
 from api.v1.views import app_views
@@ -17,9 +18,10 @@ def status() -> Response:
 
 @app_views.route('/app/v1/unauthorized', methods=['GET'], strict_slashes=False)
 def unauthorized() -> Any:
-    """ Get /api/v1/unauthorized
-    Raises
-        abort: A flask abort call with a 401 status code.
+    """ GET /api/v1/unauthorized
+    Raises:
+        HTTPException: A 401 Unauthorized error using Flask's `abort`
+        function
     """
     abort(401)
 
