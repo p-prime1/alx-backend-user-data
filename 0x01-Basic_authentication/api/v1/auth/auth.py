@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 from flask import request
-"""Module contains the Auth class"""
+"""Module contains the Auth class for handling authentication
+    in a flask application
+"""
 
 
 class Auth:
