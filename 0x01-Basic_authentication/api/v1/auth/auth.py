@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-from flask import request
-from typing import List, TypeVar
 """Module contains the Auth class for handling authentication
     in a flask application
 """
+
+
+from flask import request
+from typing import List, TypeVar, Any
 
 
 class Auth:
@@ -30,7 +32,7 @@ class Auth:
         normalized_path = path if path.endswith('/') else f"{path}/"
         return normalized_path not in excluded_paths
 
-    def authorization_header(self, request=None) -> str:
+    def authorization_header(self, request=None) -> Any:
         """
         Retrieves the Authorization header from a Flask request object.
 
@@ -41,9 +43,11 @@ class Auth:
             str: The value of Authorization header if available,
                 otherwis None.
         """
-        return None
+        if request is None:
+            return None
+        return request.headers['Authorization']
 
-    def current_user(self, request=None) -> TypeVar('User'):
+    def current_user(self, request=None) -> Any:
         """
         Retrieves the current user based on the request.
 
