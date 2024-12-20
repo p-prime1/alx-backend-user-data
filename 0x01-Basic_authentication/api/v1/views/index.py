@@ -18,9 +18,18 @@ def status() -> str:
 def unauthorized_handler():
     """GET /api/v1/status
     Raise:
-        an abort call
+        an abort call, 401
     """
     abort(401)
+
+
+@app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
+def forbidden_handler():
+    """GET /api/v1/status
+    Raise:
+        an abort call, 403
+    """
+    abort(403)
 
 
 @app_views.route('/stats/', strict_slashes=False)
